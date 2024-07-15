@@ -7,6 +7,9 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected Player player;
     
+    protected Rigidbody2D rb;
+    
+    protected float xInput;
     private string animBoolName;
     
     public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
@@ -19,11 +22,14 @@ public class PlayerState
     public virtual void Enter()
     {
         player.anim.SetBool(animBoolName, true);
+        
+        // para no tener que escribit player.rb en cada estado
+        rb = player.rb;
     }
     
     public virtual void Update()
     {
-        Debug.Log("I'm in " + animBoolName);
+        xInput = Input.GetAxisRaw("Horizontal");
     }
     
     public virtual void Exit()
